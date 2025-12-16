@@ -63,11 +63,12 @@ video::-webkit-media-controls {
 
 /*  ------------------------------------------------------------------------------------------------------------------- */
 main {
-  --offset: -500px;
+  --offset: -300px;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-shadow: 2px 2px 20px #000000;
 
   & > :first-child {
     margin-right: var(--offset);
@@ -88,7 +89,6 @@ main {
   display: flex;
   gap: 48px;
   align-items: center;
-  background-color: #00000055;
   padding: 32px;
 
   & > h1 {
