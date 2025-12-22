@@ -126,8 +126,6 @@ main {
     font-weight: 300;
 
     @media (width < 810px) {
-      display: none;
-      font-size: 0px;
     }
   }
 }
