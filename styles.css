@@ -47,7 +47,7 @@ video::-webkit-media-controls {
   align-items: center;
   justify-content: center;
 
-  @media (width < 810px) {
+  @media (max-width: 768px) {
     justify-content: space-between;
   }
 }
@@ -82,7 +82,7 @@ main {
   align-items: center;
   text-shadow: 2px 2px 20px #000000;
 
-  @media (width < 810px) {
+  @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -95,7 +95,7 @@ main {
       margin-right: 0;
       position: absolute;
     }
-    @media (max-width: 810px) {
+    @media (max-width: 768px) {
       position: static;
     }
   }
@@ -109,7 +109,7 @@ main {
   justify-content: center;
   padding: 32px;
 
-  @media (width < 810px) {
+  @media (max-width: 768px) {
     font-size: 0.75rem;
     padding: 0;
   }
@@ -117,7 +117,7 @@ main {
   & > h1 {
     font-weight: 300;
 
-    @media (width < 810px) {
+    @media (max-width: 768px) {
       display: none;
       font-size: 0px;
     }
@@ -130,7 +130,7 @@ main {
   font-weight: 500;
   text-decoration: none;
 
-  @media (width < 810px) {
+  @media (max-width: 768px) {
     gap: 1rem;
     font-size: 1.1rem;
     justify-content: space-between;
@@ -144,7 +144,7 @@ main {
   aspect-ratio: 1;
   margin-top: 2rem;
 
-  @media (width < 810px) {
+  @media (max-width: 768px) {
     max-width: 80vw;
     margin-top: 0.75rem;
   }
@@ -153,7 +153,7 @@ main {
 .alt-header-title {
   display: none;
 
-  @media (max-width: 810px) {
+  @media (max-width: 768px) {
     font-size: 1.5rem;
     display: revert;
     font-weight: 300;
@@ -179,7 +179,7 @@ footer {
     justify-content: space-between;
     gap: 4px 32px;
 
-    @media (max-width: 810px) {
+    @media (max-width: 768px) {
       gap: 4px 10px;
     }
   }
