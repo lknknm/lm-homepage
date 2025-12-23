@@ -4,7 +4,7 @@ html {
 }
 
 :root {
-  --bg-color: #16161d;
+  --bg-color: #000000;
   color: white;
 }
 
@@ -200,3 +200,30 @@ footer {
 
 /* ---- FOOTER STYLE ---- */
 /*  ------------------------------------------------------------------------------------------------------------------- */
+
+/* Bio Page Specific */
+
+.bio-enclosure {
+  display: flex;
+}
+
+.bio-image {
+  margin: 1rem;
+}
+
+.bio-text {
+  max-width: 520px;
+  background-color: #000000;
+  padding: 2rem;
+
+
+  & > h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
+
+  & > span {
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}
