@@ -1,0 +1,39 @@
+/*  ------------------------------------------------------------------------------------------------------------------- */
+/* ---- FOOTER STYLE ----- */
+
+footer {
+  font-family: "raleway", sans-serif;
+  padding: 48px;
+  font-size: 0.75rem;
+  text-align: center;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  & ul {
+    background: transparent;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 32px;
+
+    @media (max-width: 768px) {
+      gap: 4px 10px;
+    }
+  }
+
+  & a {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+}
+
+.copyright-legal {
+  font-size: 0.625rem;
+  color: oklch(37% 0.013 285.805);
+  margin-top: 10px;
+}
+
+/* ---- FOOTER STYLE ---- */
+/*  ------------------------------------------------------------------------------------------------------------------- */
