@@ -30,6 +30,7 @@ main {
   flex-direction: column;
   margin: auto;
   max-width: 1200px;
+    padding-top: 1.5rem;
 }
 
 .bio-text {
@@ -41,13 +42,20 @@ main {
   & > h1 {
     font-size: 2.5rem;
     font-weight: 300;
-    padding-right: 24rem;
+    padding-right: 32rem;
   }
 
   & > p {
     font-weight: 300;
-    font-size: 1.3rem;
-    max-width: 680px;
-        padding-top: 4rem;
+    color: var(--color-zinc-400);
+    font-size: 1.2rem;
+    max-width: 580px;
+    padding-top: 4rem;
   }
 }
+
+.paragraph-lyrics {
+  font-style: italic;
+  color: var(--color-zinc-600);
+}
+
