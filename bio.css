@@ -82,6 +82,10 @@ main {
     font-size: 1.2rem;
     max-width: 560px;
     animation: fadeIn 1s 0.4s ease-out backwards;
+
+    @media (max-width: 1250px) {
+      padding-top: 1rem;
+    }
   }
 }
 
