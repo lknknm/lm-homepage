@@ -33,13 +33,13 @@ body {
 #bg-video {
   width: 100%;
   object-fit: cover;
-  min-height: calc(100lvh + 60px);
+  min-height: calc(100% + 60px);
   z-index: -1;
 }
 
 .overlay {
   width: 100%;
-  min-height: calc(100lvh + 60px);
+  min-height: calc(100% + 60px);
   z-index: 0;
 }
 
