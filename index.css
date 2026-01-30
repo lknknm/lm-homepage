@@ -11,6 +11,12 @@
   scrollbar-width: thin;
 }
 
+body {
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   background-size: cover;
+}
+
 .backdrop {
   display: flex;
   flex-direction: column;
@@ -22,13 +28,8 @@
 
 
 .bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
-  height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
   object-fit: cover;
-  margin-top: calc(-1 * env(safe-area-inset-top)); 
 }
 
 /*  ------------------------------------------------------------------------------------------------------------------- */
