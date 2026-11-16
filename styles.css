@@ -20,7 +20,25 @@ html {
   color: white;
 }
 
+/* dot cursor (hotspot at its centre); links get the accent-blue dot, matching their hover colour.
+   2x versions keep it sharp on high-DPI / scaled screens; the plain url() line is the fallback. */
+:root {
+  --dot-1x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5' fill='white'/%3E%3C/svg%3E");
+  --dot-2x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5' fill='white'/%3E%3C/svg%3E");
+  --dot-link-1x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5' fill='%2306b6d4'/%3E%3C/svg%3E");
+  --dot-link-2x: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='4.5' fill='%2306b6d4'/%3E%3C/svg%3E");
+}
+
+html {
+  cursor: var(--dot-1x) 6 6, auto;
+  cursor: -webkit-image-set(var(--dot-1x) 1x, var(--dot-2x) 2x) 6 6, auto;
+  cursor: image-set(var(--dot-1x) 1x, var(--dot-2x) 2x) 6 6, auto;
+}
+
 a {
+  cursor: var(--dot-link-1x) 6 6, pointer;
+  cursor: -webkit-image-set(var(--dot-link-1x) 1x, var(--dot-link-2x) 2x) 6 6, pointer;
+  cursor: image-set(var(--dot-link-1x) 1x, var(--dot-link-2x) 2x) 6 6, pointer;
   color: inherit;
   text-decoration: none;
   transition: all 0.3s ease;
