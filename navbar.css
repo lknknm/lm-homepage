@@ -6,7 +6,7 @@
   justify-content: center;
   padding: 32px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     font-size: 0.75rem;
     padding: 0;
   }
@@ -15,7 +15,7 @@
     font-weight: 300;
     animation: fadeIn 0.5s 0.2s backwards;
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px), (max-height: 500px) {
       display: none;
       font-size: 0px;
     }
@@ -29,7 +29,7 @@
   text-decoration: none;
   animation: fadeIn 0.5s 0.4s backwards;
 
-  @media (max-width: 768px) {
+  @media (max-width: 768px), (max-height: 500px) {
     gap: 1rem;
     font-size: 1.1rem;
     justify-content: space-between;
