@@ -79,16 +79,25 @@ main {
     }
   }
 
+  .bio-body {
+    max-width: 560px;
+    animation: fadeIn 1s 0.4s ease-out backwards;
+
+    @media (max-width: 1250px) {
+      padding-top: 1rem;
+    }
+  }
+
   p {
     font-weight: 300;
     color: var(--color-zinc-400);
     font-size: 1.2rem;
-    max-width: 560px;
-    animation: fadeIn 1s 0.4s ease-out backwards;
     line-height: 1.2;
+    /* one blank line between paragraphs (dropped automatically at column breaks) */
+    margin-bottom: 1.2em;
 
-    @media (max-width: 1250px) {
-      padding-top: 1rem;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
@@ -107,7 +116,7 @@ main {
   }
 }
 
-.paragraph-lyrics {
+.bio-text .paragraph-lyrics {
   font-style: italic;
   color: var(--color-zinc-600);
   animation: fadeIn 1s 1s backwards;
@@ -117,4 +126,18 @@ main {
   font-size: 0.8rem;
   margin-top: 1rem;
   color: var(--color-zinc-600);
+}
+
+/* Tablets / landscape phones: magazine-style two-column text */
+@media (min-width: 700px) and (max-width: 1250px) {
+  .bio-text .bio-body {
+    max-width: none;
+    columns: 2;
+    column-gap: 2.5rem;
+  }
+
+  /* keep the lyrics excerpt together in one column */
+  .bio-text .paragraph-lyrics {
+    break-inside: avoid;
+  }
 }
