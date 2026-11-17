@@ -48,8 +48,9 @@ main {
   margin: auto;
   max-width: 1200px;
 
+  /* the whole bio text fades in together, in sync with the page swipe */
   & > :first-child {
-    animation: fadeIn 1s 0.1s backwards;
+    animation: fadeIn var(--page-duration) 0.1s var(--page-ease) backwards;
   }
 
   @media (max-width: 1250px) {
@@ -72,7 +73,6 @@ main {
     font-weight: 300;
     font-size: 2.5rem;
     padding-right: 32rem;
-    animation: fadeIn 1s 0.2s ease-out backwards;
 
     @media (max-width: 1250px) {
       padding-right: 0;
@@ -81,7 +81,6 @@ main {
 
   .bio-body {
     max-width: 560px;
-    animation: fadeIn 1s 0.4s ease-out backwards;
 
     @media (max-width: 1250px) {
       padding-top: 1rem;
@@ -119,7 +118,6 @@ main {
 .bio-text .paragraph-lyrics {
   font-style: italic;
   color: var(--color-zinc-600);
-  animation: fadeIn 1s 1s backwards;
 }
 
 .image-credits {
