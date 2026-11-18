@@ -48,6 +48,71 @@ a {
   }
 }
 
+/* Custom cursor (js/cursor.js), mouse/trackpad only: the dot inverts whatever is
+   under it, and moving it splits the background's colour channels inside a
+   round lens around it. The CSS dot cursor above stays as the fallback (touch,
+   no JS) and is shown again during page transitions, while the page is a snapshot. */
+:root {
+  --cursor-size: 13px;
+  --cursor-lens-radius: 60px; /* radius of the chromatic aberration around the dot */
+  --cursor-ca-rest: 3;        /* always-on red/blue separation at the lens edge, in px (unitless) */
+  --cursor-ca-max: 10;        /* max extra separation from movement, in px (unitless: read by the script) */
+  --cursor-ca-gain: 0.6;      /* separation per px/frame of movement */
+}
+
+html.custom-cursor:not(.vt-running),
+html.custom-cursor:not(.vt-running) * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-lens {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 2147483647;
+  visibility: hidden;
+  will-change: transform;
+}
+
+html.cursor-visible:not(.vt-running) .cursor-dot {
+  visibility: visible;
+}
+
+html.cursor-visible:not(.vt-running) .cursor-lens {
+  visibility: visible;
+}
+
+.cursor-dot {
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  margin: calc(var(--cursor-size) / -2) 0 0 calc(var(--cursor-size) / -2);
+  border-radius: 50%;
+  background: white;
+  mix-blend-mode: difference; /* white + difference = negative of what's beneath */
+  view-transition-name: cursor-dot;
+}
+
+.cursor-lens {
+  width: calc(var(--cursor-lens-radius) * 2);
+  height: calc(var(--cursor-lens-radius) * 2);
+  margin: calc(var(--cursor-lens-radius) * -1) 0 0 calc(var(--cursor-lens-radius) * -1);
+  border-radius: 50%;
+  backdrop-filter: url(#cursor-ca);
+  /* strongest near the dot, fading out towards the radius */
+  -webkit-mask-image: radial-gradient(closest-side, black 35%, transparent);
+  mask-image: radial-gradient(closest-side, black 35%, transparent);
+  view-transition-name: cursor-lens;
+}
+
+/* keep the cursor out of page-transition snapshots */
+::view-transition-group(cursor-dot),
+::view-transition-group(cursor-lens) {
+  animation: none;
+  visibility: hidden;
+}
+
 hr {
   border: 1px solid var(--color-zinc-800);
 }

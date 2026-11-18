@@ -120,7 +120,7 @@
     var m = /matrix(3d)?\((.+)\)/.exec(t || '');
     if (!m) return null;
     var v = m[2].split(',').map(parseFloat);
-    return (m[1] ? v[13] : v[5]) + cssNumber('--ca-trail');
+    return (m[1] ? v[13] : v[5]) + cssNumber('--edge-box');
   }
 
   // SVG filter values can't be animated from CSS keyframes, so follow the edge
@@ -152,7 +152,6 @@
       var duration = anim.effect.getComputedTiming().duration || 1;
       var p = Math.min(Math.max((anim.currentTime || 0) / duration, 0), 1);
       // follow the line's speed: peaks early (12%), then decays as it settles,
-      // matching the fringe keyframes in animations.css
       var PEAK = 0.12;
       var amount = (p / PEAK) * Math.exp(1 - p / PEAK);
       var y = lineY();
@@ -204,10 +203,11 @@
             if (fx) root.classList.add('vt-fx');
           });
         };
+        root.classList.add('vt-running'); // lets the custom cursor step aside (styles.css)
         var vt = document.startViewTransition(update);
         vt.ready.then(function () { if (fx) driveFx(fx); }, function () {});
         return vt.finished.finally(function () {
-          root.classList.remove('vt-fx');
+          root.classList.remove('vt-fx', 'vt-running');
           edge.remove();
           if (fx) fx.remove();
         });

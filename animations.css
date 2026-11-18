@@ -24,14 +24,12 @@
    The current page is frozen as a snapshot (old). The next page (new) stays
    still and is revealed top-to-bottom by a clip that sweeps down. A separate
    hairline white edge (.vt-edge, added by the script) rides the clip line,
-   with red/cyan fringes that split apart, softly blurred, mid-sweep. */
+   and the old page just below it is warped, colour-split and blurred (the
+   "lens", an SVG filter driven by the script). */
 :root {
   --page-duration: 600ms;
   --page-ease: cubic-bezier(0.22, 1, 0.36, 1); /* easeOutQuint: fast start, long settle */
-  --ca-red: rgba(255, 0, 64, 1);
-  --ca-cyan: rgba(0, 220, 255, 1);
-  --ca-blur: 4px;       /* softness of the red/cyan fringes */
-  --ca-trail: 40px;     /* room above the line for the trailing fringes */
+  --edge-box: 2px;      /* height of the edge layer; the white line is its bottom edge */
   --band-blur: 16px;    /* blur strength right under the line, at its peak */
   --band-height: 240px; /* how far below the line the blur fades out */
   --ca-split: 1;         /* 1 = split the background's colour channels under the line, 0 = off */
@@ -60,62 +58,18 @@
   to   { clip-path: inset(0 0 0 0); }
 }
 
-/* The reveal edge: a hairline white line on the reveal line, with red/cyan
-   fringes TRAILING above it (where the line was in previous frames, like a
-   motion-smeared chromatic aberration). Only exists during a transition.
-   The box sits above the line (the line is its bottom edge) so the trail fits. */
+/* The reveal edge: a hairline white line on the reveal line.
+   Only exists during a transition. The line is the bottom edge of the box. */
 .vt-edge {
   position: fixed;
-  top: calc(-1 * var(--ca-trail));
+  top: calc(-1 * var(--edge-box));
   left: 0;
   right: 0;
-  height: var(--ca-trail);
+  height: var(--edge-box);
   pointer-events: none;
   view-transition-name: vt-edge;
   /* the white hairline, along the bottom of the box = the reveal line */
   background: linear-gradient(white, white) bottom / 100% 0.5px no-repeat;
-}
-
-/* the fringes start on the line and split away upwards while it's moving
-   fastest, then merge back into it as it slows down */
-.vt-edge::before,
-.vt-edge::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 5px;
-  filter: blur(var(--ca-blur));
-  opacity: 0;
-  /* linear: the keyframes themselves follow the line's speed (see below) */
-  animation: var(--page-duration) linear both;
-}
-.vt-edge::before {
-  background: var(--ca-cyan);
-  animation-name: caCyan;
-}
-.vt-edge::after {
-  background: var(--ca-red);
-  animation-name: caRed;
-}
-
-/* The effects follow the line's speed. With an ease-out sweep the line is
-   fastest right at the start and then slows down, so each effect jumps in
-   early (peak at 12%) and decays as the line settles. */
-@keyframes caCyan {
-  0%   { opacity: 0;    transform: translateY(0); }
-  12%  { opacity: 1;    transform: translateY(-4px); }
-  35%  { opacity: 0.6;  transform: translateY(-2px); }
-  65%  { opacity: 0.2;  transform: translateY(-1px); }
-  100% { opacity: 0;    transform: translateY(0); }
-}
-@keyframes caRed {
-  0%   { opacity: 0;    transform: translateY(0); }
-  12%  { opacity: 1;    transform: translateY(-14px); }
-  35%  { opacity: 0.6;  transform: translateY(-8px); }
-  65%  { opacity: 0.2;  transform: translateY(-3px); }
-  100% { opacity: 0;    transform: translateY(0); }
 }
 
 /* same duration + easing as the clip, so the line stays on the reveal line
@@ -129,8 +83,8 @@
 }
 
 @keyframes edgeSweep {
-  from { transform: translateY(calc(-1 * var(--ca-trail))); }
-  to   { transform: translateY(calc(100vh - var(--ca-trail))); }
+  from { transform: translateY(calc(-1 * var(--edge-box))); }
+  to   { transform: translateY(calc(100vh - var(--edge-box))); }
 }
 
 /* The "lens" under the line: warp + red/blue channel split + blur, limited to
